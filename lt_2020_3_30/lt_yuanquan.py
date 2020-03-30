@@ -18,7 +18,7 @@
 __author__ = 'Jax'
 
 
-class Solution:
+class SolutionBad:
     def last_remaining(self, n: int, m: int) -> int:
         """圆圈问题"""
         # 构建列表
@@ -41,16 +41,28 @@ class Solution:
         print(r_list[0])
 
 
-Solution().last_remaining(n=10, m=17)
+# Solution().last_remaining(n=10, m=17)
 
 
 #############################
 # 约瑟夫环解体思路, 比上边的时间节省了 很多倍数  todo 暂时还没看懂
 
-class Solution:
+class SolutionGood:
+    """
+    此种思路, 不是按照正常思路来的, 这个是递推公式的方法
+
+    几篇写的比较好的讲解:
+        https://blog.csdn.net/ezereal/article/details/52654381
+        http://www.360doc.com/content/19/0212/18/32116899_814506447.shtml
+        https://wenku.baidu.com/view/cb318affb84ae45c3b358cb3.html
+    """
+
     def lastRemaining(self, n: int, m: int) -> int:
-        x = 0
-        for i in range(2, n + 1):
+        x = 0  # 这个是只有一个人的时候的胜利者的位置
+        for i in range(2, n + 1):  # 一个人的胜利者已经求出来了, 所有从2个人开始
             x = (m + x) % i
         return x
 
+
+# print([i for i in range(2, 4)])
+print(SolutionGood().lastRemaining(n=5, m=3))
