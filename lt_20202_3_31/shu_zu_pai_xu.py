@@ -26,13 +26,37 @@ class Solution:
         :return:
         """
         length = len(a)
+        count = 1
         for i in range(length):
-            for j in range(1, length - i):
-                if a[j - 1] > a[j]:
-                    a[j], a[j - 1] = a[j - 1], a[j]
-        print(a)
+            for j in range(0, length - i - 1):
+                count += 1
+                if a[j] > a[j + 1]:
+                    a[j], a[j + 1] = a[j + 1], a[j]
+        print(count)
 
         return a
 
+    def maopaopaixuyouhua1(self, nums: List[int]):
+        """
+        此种优化属于不稳定优化, 当一定的情况下有排序好的时候, 这中方法会比较好. 当一个循环中标记没变的时候, 说明已经是好的排序了
+        :param nums:
+        :return:
+        """
+        count = 1
+        for i in range(len(nums)):
+            stamp = False
+            for j in range(len(nums) - i - 1):
+                count += 1
+                if nums[j] > nums[j + 1]:
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
+                    stamp = True
 
-Solution().maopao([5, 1, 1, 2, 0, 0])
+            if not stamp:
+                print(count)
+                return nums
+        print(count)
+
+
+Solution().maopaopaixuyouhua1([1, 2, 3, 4, 5])
+print("------------------------------")
+Solution().maopao([1, 2, 3, 4, 5])
