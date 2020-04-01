@@ -3,7 +3,7 @@
 最坏时间复杂度: O(n**2)
 
 """
-
+import time
 from typing import List
 
 
@@ -97,54 +97,55 @@ class Solution:
         return nums
 
     def mao_pao_you_hua_3(self, nums):
-        """
-        大致思想就是一次排序可以确定两个值，
-        正向扫描找到最大值交换到最后，
-        反向扫描找到最小值交换到最前面。
-        例如：排序数据1,2,3,4,5,6,0  todo 没明白, 找时间在搞?
-        :param nums:
-        :return:
-        """
-        # count = 1  # 计数器
-        # stamp = False  # 标记
-        # pos = len(nums) - 1  # 这个是记录最后位置的下表
-        # s = 0  # 第三个变量
-        # n = 0
-        # # [1, 2, 5, 7, 4, 3, 6, 8, 9, 10]
-        # for i in range(len(nums) - 1):
-        #     for j in range(n, pos):
-        #         count += 1
-        #         if nums[j] > nums[j + 1]:
-        #             nums[j], nums[j + 1] = nums[j + 1], nums[j]
-        #             stamp = True
-        #             s = j
-        #
-        #     if not stamp:
-        #         return nums
-        #
-        #     pos = s - 1  # 此次 s 就是交换的位置, s - 1 就是下次最后比较的位置
-        #     for k in range(0, pos, -1):
-        #         if nums[k] < nums[k - 1]:
-        #             nums[k], nums[k - 1] = nums[k - 1], nums[k]
-        #             stamp = True
-        #     n += 1
-        #     # print(n)
-        #     if n > pos:
-        #
-        #         return nums
-        #     if not stamp:
-        #         return nums
-        #     # print(nums)
-        #     # print('~~~~~~~~~~~~~~~')
-        # return nums
+        # def mp(nums: List[int]) -> List[int]:
+        """冒泡排序最终版本"""
+        length = len(nums)
+
+        s = 0  # 标记最小的变动的位置
+        b = length - 1  # 标记最大变动的位置
+        swapb = 0
+        swaps = length - 1
+        for i in range(length):
+            flag = False
+            for j in range(s, b):
+                if nums[j] > nums[j + 1]:
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
+                    flag = True
+                    swapb = j
+
+            b = swapb
+            if not flag:
+                return nums
+            for k in range(b, s, -1):
+                if nums[k] < nums[k - 1]:
+                    nums[k], nums[k - 1] = nums[k - 1], nums[k]
+                    flag = True
+                    swaps = k
+
+            s = swaps
+            if not flag:
+                return nums
+
+        # print(mp([95, 85, 12, 52, 64, 74, 105, 502, 4, 7, 6, 1, 74, 60, 141, 19, 34, 45, 59]))
 
 
+start_t = time.time()
 print(Solution().maopaopaixuyouhua1([1, 2, 5, 7, 4, 3, 6, 8, 9, 10]))
+end_t1 = time.time()
 print("------------------------------")
 print(Solution().maopao([1, 2, 5, 7, 4, 3, 6, 8, 9, 10]))
+end_t2 = time.time()
 print("------------------------------")
 print(Solution().mao_pao_you_hua_2([1, 2, 5, 7, 4, 3, 6, 8, 9, 10]))
+end_t3 = time.time()
 print("****************")
 print(Solution().mao_pao_you_hua_3([1, 2, 5, 7, 4, 3, 6, 8, 9, 10]))
+end_t4 = time.time()
+print(11111111111111111111111111111111111111)
 
+t1 = end_t1 - start_t
+t2 = end_t2 - start_t - t1
+t3 = end_t3 - start_t - t2 - t1
+t4 = end_t4 - start_t - t3 - t2 - t1
+print(t1, t2, t3, t4)
 # [1 ,3, 2]
