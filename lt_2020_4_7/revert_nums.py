@@ -64,7 +64,7 @@ class Solution:
     def reverse_better(
             self,
             x: int) -> int:
-
+        # todo 已明白， 就是自己可能想不到
         y, res = abs(x), 0
         # 则其数值范围为 [−2^31,  2^31 − 1]
         boundry = (1 << 31) - 1 if x > 0 else 1 << 31
