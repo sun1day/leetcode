@@ -42,6 +42,21 @@ def solution(l1: ListNode, l2: ListNode):
     return rst.next  ##返回新建指针
 
 
+def solution_two(l1: ListNode, l2: ListNode):
+    """
+    todo 看不懂啊, 链表， 需要研究一下
+    :param l1:
+    :param l2:
+    :return:
+    """
+    if l1 and l2:
+        if l1.val > l2.val:
+            l1, l2 = l2, l1
+        l1.next = solution_two(l1.next, l2)
+
+    return l1 or l2
+
+
 if __name__ == '__main__':
     n1 = ListNode(1)
     n2 = ListNode(2)
@@ -53,7 +68,7 @@ if __name__ == '__main__':
     n6 = ListNode(4)
     n4.next = n5
     n5.next = n6
-    ret = solution(n1, n4)
+    ret = solution_two(n1, n4)
     while ret.next:
         print(ret)
         ret = ret.next
